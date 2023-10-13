@@ -1,9 +1,5 @@
-// Project Title
-// Your Name
-// Date
-//
-// Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// 2D Grid
+// Oct 12, 2023
 
 let grid = [[0, 1, 0, 0],
             [1, 0, 1, 1],
@@ -16,11 +12,12 @@ let cellSize;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+
   if (width < height) {
     cellSize = width/ROWS;
   }
   else {
-    cellSize = height/COLS
+    cellSize = height/ROWS;
   }
 }
 
@@ -29,24 +26,30 @@ function draw() {
   displayGrid();
 }
 
-function displayGRID(){
-  for (let y = 0; y < ROWS; y++) {
-    for (let x = 0; x < COLS; x++) {
-      rect(x * cellSize, y * cellSize, cellSize, cellSize);
-    }
-  }
-}
-
 function mousePressed() {
-  let x = Math.floor(mouseX/cellsize);
+  let x = Math.floor(mouseX/cellSize);
   let y = Math.floor(mouseY/cellSize);
 
-  console.log(x,y)
-
-  if (grid[y][x]===0) {
-    grid[y][x]===1
+  if (grid[y][x] === 0) {
+    grid[y][x] = 1;
   }
-  else {
-    grid[y][x]===0
+
+  else if (grid[y][x] === 1) {
+    grid[y][x] = 0;
+  }
+  console.log(x, y);
+}
+
+function displayGrid() {
+  for (let y = 0; y < ROWS; y++) {
+    for (let x = 0; x < COLS; x++) {
+      if (grid[y][x] === 1) {
+        fill("black");
+      }
+      else if (grid[y][x] === 0) {
+        fill("white");
+      }
+      rect(x * cellSize, y * cellSize, cellSize, cellSize);
+    }
   }
 }
